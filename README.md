@@ -4,18 +4,30 @@
 
 This project contains Docker build information for building and launching the full OpenChatAlytics Stack.
 
-To pull and run the Docker images, ensure that `docker-compose` is installed, then update the images by running
+The main Dockerfile will run the whole stack, including the ChatAlytics platform and UI using the default persistence layer. You can find more Dockerfiles including one for setting up ChatAlytics with PostgreSQL in dockerfiles
 
+All Dockerfiles contained in this project expect you to have the following directory structure:
 ```
-docker-compose pull
+OpenChatAlytics --|
+                  |-- OpenChatAlytics
+                  |
+                  |-- OpenChatAlyticsUI
 ```
+You can then build the image by running:
+```
+docker build -t chatalytics -f ./Dockerfile ../
+```
+The command above tells docker to name the image chatalytics and run the file Dockerfile and use the parent directory as the root. Since we're going to be borrowing resources from OpenChatAlytics/OpenChatAlytics and OpenChatAlytics/OpenChatAlyticsUI setting the parent directory is necessary.
 
-Once the latest images have been downloaded, start the containers by running
-
+To run the image and expose the UI, web and compute ports you can run the following command:
 ```
-docker-compose up
+docker run -d -p 3001:3001 -p 8080:8080 -p 9000:9000 --name chatalytics chatalytics
 ```
 
 Note that this requires ports `3001`, `8080` and `9000` to be open and available on your local machine.
-OpenChatalyticsWeb should be available on `localhost:8080`, OpenChatalyticsCompute Event Stream on `9000` and 
-OpenChatalyticsUI should be available on `localhost:3001`.
+OpenChatAlytics-Web should be available on `localhost:8080`, OpenChatAlytics-Compute Event Stream on `9000` and OpenChatAlyticsUI should be available on `localhost:3001`.
+
+If you want to SSH into the container you can run the following command:
+```
+docker exec -i -t chatalytics bash
+```
