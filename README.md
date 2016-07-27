@@ -9,11 +9,13 @@ The main Dockerfile will run the whole stack, including the ChatAlytics platform
 All Dockerfiles contained in this project expect you to have the following directory structure:
 ```
 OpenChatAlytics --|
+                  |-- OpenChatAlyticsStack
+                  |
                   |-- OpenChatAlytics
                   |
                   |-- OpenChatAlyticsUI
 ```
-You can then build the image by running:
+You can then build the image by running the following command from within the OpenChatAlyticsStack directory:
 ```
 docker build -t chatalytics -f ./Dockerfile ../
 ```
