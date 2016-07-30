@@ -21,14 +21,18 @@ RUN mkdir -p ${CHATALYTICSDIR}
 RUN mkdir -p ${DATABASEDIR}
 
 # Copy the source code
-COPY OpenChatAlytics ${CHATALYTICSDIR}
+COPY OpenChatAlytics ${CHATALYTICSDIR}/code
 COPY OpenChatAlyticsUI ${CHATALYTICSUIDIR}
 
 # Setup the platform first
-WORKDIR ${CHATALYTICSDIR}
+WORKDIR ${CHATALYTICSDIR}/code
 RUN mvn clean package -Dmaven.test.skip=true
+# Copy all the necessary things
 RUN cp web/target/chatalytics-web-0.3-with-dependencies.jar ${CHATALYTICSDIR}
 RUN cp compute/target/chatalytics-compute-0.3-with-dependencies.jar ${CHATALYTICSDIR}
+RUN cp -r config ${CHATALYTICSDIR}
+WORKDIR ${CHATALYTICSDIR}
+RUN rm -rf code
 
 # Now setup the UI
 WORKDIR ${CHATALYTICSUIDIR}
