@@ -36,7 +36,7 @@ nohup java -cp\
     -c $config_file 2>&1 > /dev/null &
 
 sleep_time_secs=5
-echo "Sleeping for $sleep_time_secs waiting for compute to start up"
+echo "Sleeping for $sleep_time_secs waiting for the web server to start up"
 sleep $sleep_time_secs
 
 cd ../chatalyticsui
