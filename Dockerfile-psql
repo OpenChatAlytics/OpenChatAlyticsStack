@@ -52,7 +52,7 @@ RUN cp compute/target/chatalytics-compute-0.3-with-dependencies.jar ${CHATALYTIC
 RUN cp -r config ${CHATALYTICSDIR}
 WORKDIR ${CHATALYTICSDIR}
 RUN rm -rf code
-RUN cp config/META-INF/persistence.psql.xml persistence.xml
+RUN cp config/META-INF/persistence.psql.xml config/META-INF/persistence.xml
 
 # Now setup the UI
 WORKDIR ${CHATALYTICSUIDIR}
