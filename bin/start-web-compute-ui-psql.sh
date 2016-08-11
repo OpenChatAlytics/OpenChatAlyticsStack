@@ -17,8 +17,6 @@ cd chatalytics
 
 echo "Starting compute server with configuration: $config_file..."
 
-sleep 15
-
 nohup java -cp\
     chatalytics-compute-0.3-with-dependencies.jar:config\
     -Dlogback.configurationFile=config/compute/logback.xml com.chatalytics.compute.ChatAlyticsEngineMain\
