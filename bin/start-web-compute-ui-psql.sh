@@ -10,7 +10,7 @@ fi
 config_file=$1
 
 echo "Starting the database"
-su -c '${POSTGRESDIR}pg_ctl --pgdata ${DATABASEDIR}chatalytics --log ${DATABASEDIR}chatalytics/db-logfile -w start' postgres
+su -c '${POSTGRESDIR}pg_ctl --pgdata ${DATABASEDIR}chatalytics --log ${DATABASEDIR}chatalytics/db-logfile -w restart' postgres
 echo "Finished starting the database"
 
 cd chatalytics
