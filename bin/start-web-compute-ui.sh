@@ -13,8 +13,10 @@ cd chatalytics
 
 echo "Starting compute server with configuration: $config_file..."
 
-nohup java -cp\
-    chatalytics-compute-0.3-with-dependencies.jar:config\
+nohup java\
+    -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation\
+    -XX:NumberOfGCLogFiles=1 -XX:GCLogFileSize=10M -Xloggc:chatalytics_compute-gc.log -XX:+UseSerialGC\
+    -cp chatalytics-compute-0.3-with-dependencies.jar:config\
     -Dlogback.configurationFile=config/compute/logback.xml com.chatalytics.compute.ChatAlyticsEngineMain\
     -c $config_file 2>&1 > /dev/null &
 
@@ -24,8 +26,10 @@ sleep $sleep_time_secs
 
 echo "Starting web server with configuration: $config_file..."
 
-nohup java -cp\
-    chatalytics-web-0.3-with-dependencies.jar:config\
+nohup java\
+    -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation\
+    -XX:NumberOfGCLogFiles=1 -XX:GCLogFileSize=10M -Xloggc:chatalytics_web-gc.log -XX:+UseSerialGC\
+    -cp chatalytics-web-0.3-with-dependencies.jar:config\
     -Dlogback.configurationFile=config/web/logback.xml com.chatalytics.web.ServerMain\
     -c $config_file 2>&1 > /dev/null &
 
